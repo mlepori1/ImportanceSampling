@@ -48,7 +48,7 @@ class GenerateShapes:
 
         c = list(zip(GenerateShapes.AREA_MEANS[:num_classes], GenerateShapes.COLOR_MEANS[:num_classes], GenerateShapes.SHAPE[:num_classes]))
         print(c)
-        self.areas, self.colors, self.shapes, self.angles = zip(*c)
+        self.areas, self.colors, self.shapes = zip(*c)
 
         self.shape_to_idx = {shape: i for (i, shape) in enumerate(self.shapes)}
 
