@@ -25,8 +25,8 @@ class GenerateShapes:
     COLOR_MEANS = ['yellow', 'blue', 'green', 'purple', 'red']
     COLOR_STDS = [[25./255] * 3]*5
 
-    ORIENTATIONS = [100, 60, 45, 20, 0]
-    ORIENT_STDS = [5]*5
+    # ORIENTATIONS = [100, 60, 45, 20, 0]
+    # ORIENT_STDS = [5]*5
 
     SHAPE = ['circle', 'square', 'rectangle', 'ellipse', 'triangle']
 
@@ -44,10 +44,9 @@ class GenerateShapes:
         random.shuffle(GenerateShapes.SHAPE)
         random.shuffle(GenerateShapes.COLOR_MEANS)
         random.shuffle(GenerateShapes.AREA_MEANS)
-        random.shuffle(GenerateShapes.ORIENTATIONS)
 
 
-        c = list(zip(GenerateShapes.AREA_MEANS[:num_classes], GenerateShapes.COLOR_MEANS[:num_classes], GenerateShapes.SHAPE[:num_classes], GenerateShapes.ORIENTATIONS[:num_classes]))
+        c = list(zip(GenerateShapes.AREA_MEANS[:num_classes], GenerateShapes.COLOR_MEANS[:num_classes], GenerateShapes.SHAPE[:num_classes]))
         print(c)
         self.areas, self.colors, self.shapes, self.angles = zip(*c)
 
@@ -66,9 +65,7 @@ class GenerateShapes:
         color = np.clip(np.random.normal(color_mean, color_std), 0, 1)
 
         if self.use_angle:
-            angle_mean = self.angles[idx]
-            angle_std = GenerateShapes.ORIENT_STDS[idx]
-            angle = np.clip(np.random.normal(angle_mean, angle_std), 0, 180)
+            angle = np.random.uniform(0, 180)
         else:
             angle = 0.
 
@@ -92,11 +89,6 @@ class GenerateShapes:
         else:
             color_idx = area_idx
 
-        if independent:
-            angle_idx = self.shape_to_idx[random.choice(self.shapes[:idx] + self.shapes[idx:])]
-        else:
-            angle_idx = area_idx
-
         area_mean = self.areas[area_idx]
         area_std = GenerateShapes.AREA_STDS[area_idx]
         area = np.clip(np.random.normal(area_mean, area_std), 50 * SCALE, 1600 * SCALE)
@@ -106,9 +98,7 @@ class GenerateShapes:
         color = np.clip(np.random.normal(color_mean, color_std), 0, 1)
 
         if self.use_angle:
-            angle_mean = self.angles[angle_idx]
-            angle_std = GenerateShapes.ORIENT_STDS[angle_idx]
-            angle = np.clip(np.random.normal(angle_mean, angle_std), 0, 180)
+            angle = np.random.uniform(0, 180)
         else:
             angle = 0
 
