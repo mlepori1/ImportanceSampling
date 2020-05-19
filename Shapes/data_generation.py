@@ -164,4 +164,4 @@ def create_dataset(path, name, categories, use_angle, num_canonical_samples, num
 
 
 if __name__ == '__main__':
-    create_dataset('Shapes/Datasets', 'test_mk_data', 5, False, 10000, 5000)
+    create_dataset('Shapes/Datasets', 'test_mk_data', 5, True, 10000, 5000)
