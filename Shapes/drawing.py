@@ -1,6 +1,7 @@
 import numpy as np
 from skimage.transform import rotate
-from .class_definitions import SHAPES
+from Shapes.class_definitions import SHAPES, COLORS
+import matplotlib.pyplot as plt
 
 IMSIZE = 64
 
@@ -70,12 +71,16 @@ def draw_square(area, color, degrees=0):
 def draw_triangle(area, color, degrees=0):
     # equilateral triangles only
     length = np.sqrt(4 * area/np.sqrt(3))
-    top = (IMSIZE/2 - np.sqrt(3)*length/4, IMSIZE/2)
-    left = (IMSIZE/2 + np.sqrt(3)*length/4, IMSIZE/2 - length/2)
-    right = (IMSIZE/2 + np.sqrt(3)*length/4, IMSIZE/2 + length/2)
+
+    height = np.sqrt(3)/2 * length
+
+    top = (IMSIZE/2 + (2/3) * height, IMSIZE/2)
+    left = (IMSIZE/2 - (1/3) * height, IMSIZE/2 - length/2)
+    right = (IMSIZE/2 - (1/3) * height, IMSIZE/2 + length/2)
 
     r = [top[0], left[0], right[0]]
     c = [top[1], left[1], right[1]]
+
     args = {
         'r': r,
         'c': c
@@ -85,10 +90,14 @@ def draw_triangle(area, color, degrees=0):
 
 
 if __name__ == '__main__':
-    draw_ellipse(100, 'yellow', 0)
-    draw_circle(100, 'blue')
-    draw_rectangle(100, 'red', 0)
-    draw_square(100, 'purple', 0)
-    draw_triangle(100, 'green', 0)
-
+    # draw_ellipse(100, 'yellow', 0)
+    # draw_circle(100, 'blue')
+    # draw_rectangle(100, 'red', 0)
+    # draw_square(100, 'purple', 0)
+    area = 625 * np.sqrt(3) / 4
+    fix, ax = plt.subplots(1, 1)
+    img = draw_triangle(area, COLORS['green'], 0)
+    ax.imshow(img)
+    # ax.axis('off')
+    plt.show()
 
