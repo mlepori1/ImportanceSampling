@@ -186,12 +186,12 @@ if __name__ == '__main__':
 
     shapes = ['square', 'square', 'triangle', 'triangle']
 
-    areas = [1000, 1000, 1000, 1000]
-    area_stds = [10, 10, 10, 10]
+    areas = [600, 600, 600, 600]
+    area_stds = [100, 100, 100, 100]
 
     categories = 4
     use_angle = True
 
     generator = GenerateShapes(categories, use_angle=use_angle, shapes=shapes, areas=areas, colors=colors, area_stds=area_stds, color_stds=color_stds, randomize=False)
 
-    create_dataset('Datasets', 'test_mk_data', generator, categories, 10000)
+    create_dataset('Datasets', 'test_mk_data', generator, categories, 40000)
